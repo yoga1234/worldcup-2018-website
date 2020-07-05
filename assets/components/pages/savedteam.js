@@ -1,4 +1,5 @@
 const SAVEDTEAM = () => {
+  window.location.hash = "savedteam";
   return `
     <div>
       <h1>Saved team</h1>
