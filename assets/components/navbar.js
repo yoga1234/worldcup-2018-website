@@ -1,5 +1,5 @@
 const NAVBAR = `
-  <nav>
+  <nav class="blue lighten-1">
     <div class="container">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">KICKOFF</a>

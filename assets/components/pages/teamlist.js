@@ -12,7 +12,7 @@ const TEAMLIST = () => {
             <div class="col s8">
               <p>Name: France</p>
               <p>TLA: FRA</p>
-              <a class="waves-effect waves-light btn">Detail</a>
+              <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@ const TEAMLIST = () => {
             <div class="col s8">
               <p>Name: France</p>
               <p>TLA: FRA</p>
-              <a class="waves-effect waves-light btn">Detail</a>
+              <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@ const TEAMLIST = () => {
             <div class="col s8">
               <p>Name: France</p>
               <p>TLA: FRA</p>
-              <a class="waves-effect waves-light btn">Detail</a>
+              <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@ const TEAMLIST = () => {
             <div class="col s8">
               <p>Name: France</p>
               <p>TLA: FRA</p>
-              <a class="waves-effect waves-light btn">Detail</a>
+              <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
             </div>
           </div>
         </div>
