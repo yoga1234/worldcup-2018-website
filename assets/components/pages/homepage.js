@@ -17,7 +17,7 @@ const HOMEPAGE = () => {
             </div>
             <div class="col s8 m12 l12">
               <h5 class="center">Teams</h5>
-              <p class="center">Teams on World Cup 2018 is here, find your favourite!</p>
+              <p class="center">World Cup 2018 teams is here, find your favourite!</p>
             </div>
           </div>
         </div>
