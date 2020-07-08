@@ -27,3 +27,19 @@ self.addEventListener("install", function(event) {
     })
   );
 });
+
+self.addEventListener("fetch", function(event) {
+  event.respondWith(
+    caches
+      .match(event.request, { cacheName: CACHE_NAME})
+      .then(function(response) {
+        if(response) {
+          console.log("service worker: ", response.url);
+          return response;
+        }
+
+        console.log("Server: ", event.request.url);
+        return fetch(event.request);
+      })
+  )
+})
