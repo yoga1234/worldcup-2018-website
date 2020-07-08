@@ -43,6 +43,9 @@ const HOMEPAGE = () => {
             </div>
           </div>
         </div>
+        <div class="center">
+          <h4 class="thin">This website offers:</h4>
+        </div>
         <div class="col s12 m4 l4">
           <div class="row card-panel zero-margin">
             <div class="col s4 m12 l12">
