@@ -11,6 +11,7 @@ const getHomepageData = () => {
   HOMEPAGE_DATA().then((data) => {
     dataShow = JSON.parse(data);
     console.log("data: " + dataShow["name"]);
+    mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
   })
 }
 
@@ -18,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
-  mainTag.innerHTML = CONTENT_LOADER("homepage");
+  mainTag.innerHTML = CONTENT_LOADER("homepage", "empty");
+  getHomepageData();
 
   // initialization parallax
   const parallaxElems = document.querySelectorAll('.parallax');
@@ -27,18 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // initialization navbar
   const navbarElems = document.querySelectorAll('.sidenav');
   const navbarInstances = M.Sidenav.init(navbarElems, {});
-
-  getHomepageData();
 });
 
 // changing the content
 window.addEventListener('hashchange', function() {
   if(location.hash === "#teamlist") {
-    mainTag.innerHTML =  CONTENT_LOADER("teamlist")
+    mainTag.innerHTML =  CONTENT_LOADER("teamlist", "empty");
   } else if(location.hash === "#savedteam") {
-    mainTag.innerHTML = CONTENT_LOADER("savedteam")
+    mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
   } else {
-    mainTag.innerHTML =  CONTENT_LOADER("homepage")
+    mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
+    getHomepageData();
   }
 }, false)
 

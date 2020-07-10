@@ -1,4 +1,53 @@
-const HOMEPAGE = () => {
+const HOMEPAGE = (data) => {
+  let eventData = ''
+  if(data == "empty") {
+    eventData = `
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    eventData = `
+      <div class="col s12 m12 l4">
+        <div class="card-panel">
+          <h5>Name: </h5>
+          <p>${data.name}</p>
+        </div>
+      </div>
+      <div class="col s12 m12 l4">
+        <div class="card-panel">
+          <h5>Code: </h5>
+          <p>${data.code}</p>
+        </div>
+      </div>
+      <div class="col s12 m12 l4">
+        <div class="card-panel">
+          <h5>Stage: </h5>
+          <p>${data.area.name}</p>
+        </div>
+      </div>
+      <div class="col s12 m12 l6">
+        <div class="card-panel">
+          <h5>Start Date: </h5>
+          <p>${data.currentSeason.startDate}</p>
+        </div>
+      </div>
+      <div class="col s12 m12 l6">
+        <div class="card-panel">
+          <h5>End Date: </h5>
+          <p>${data.currentSeason.endDate}</p>
+        </div>
+      </div>
+    `;
+  }
   window.location.hash = "homepage";
   return `
     <div class="container">
@@ -12,16 +61,7 @@ const HOMEPAGE = () => {
         </div>
         <div class="center">
           <h3 class="thin">EVENT DETAIL:</h3>
-          <div class="preloader-wrapper big active">
-          <div class="spinner-layer spinner-blue-only">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
+          ${eventData}
         </div>
         </div>
         <div class="center">
