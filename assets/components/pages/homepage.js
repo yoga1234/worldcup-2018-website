@@ -12,36 +12,17 @@ const HOMEPAGE = () => {
         </div>
         <div class="center">
           <h3 class="thin">EVENT DETAIL:</h3>
-          <div class="col s12 m12 l4">
-            <div class="card-panel">
-              <h5>Name: </h5>
-              <p>FIFA World Cup 2018</p>
+          <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
             </div>
           </div>
-          <div class="col s12 m12 l4">
-            <div class="card-panel">
-              <h5>Code: </h5>
-              <p>WC</p>
-            </div>
-          </div>
-          <div class="col s12 m12 l4">
-            <div class="card-panel">
-              <h5>Stage: </h5>
-              <p>World</p>
-            </div>
-          </div>
-          <div class="col s12 m12 l4">
-            <div class="card-panel">
-              <h5>Start Date: </h5>
-              <p>30-99-9999</p>
-            </div>
-          </div>
-          <div class="col s12 m12 l4 offset-l4">
-            <div class="card-panel">
-              <h5>End Date: </h5>
-              <p>30-99-9999</p>
-            </div>
-          </div>
+        </div>
         </div>
         <div class="center">
           <h4 class="thin">This website offers:</h4>
