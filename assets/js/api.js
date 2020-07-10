@@ -15,6 +15,16 @@ const HOMEPAGE_DATA = () => {
   }).catch((err) => {
     return err;
   })
-}
+};
+
+// getting team list
+const TEAMPAGE_DATA = () => {
+
+};
+
+// getting single team data
+const SINGLETEAM_DATA = () => {
+
+};
 
 export default HOMEPAGE_DATA;

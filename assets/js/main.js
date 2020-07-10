@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
+  // initial page
   mainTag.innerHTML = CONTENT_LOADER("homepage", "empty");
   getHomepageData();
 
