@@ -63,7 +63,8 @@ const HOMEPAGE = (data) => {
           <h3 class="thin">EVENT DETAIL:</h3>
           ${eventData}
         </div>
-        </div>
+      </div>
+      <div class="row">
         <div class="center">
           <h4 class="thin">This website offers:</h4>
         </div>
