@@ -1,6 +1,6 @@
 import NAVBAR from '../components/navbar.js';
 import FOOTER from '../components/footer.js';
-import HOMEPAGE_DATA from './api.js'
+import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 
 import CONTENT_LOADER from './contentLoader.js';
 
@@ -10,10 +10,17 @@ const getHomepageData = () => {
   let dataShow = '';
   HOMEPAGE_DATA().then((data) => {
     dataShow = JSON.parse(data);
-    console.log("data: " + dataShow["name"]);
     mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
-  })
-}
+  });
+};
+
+const getTeamListData = () => {
+  let dataShow = '';
+  TEAMPAGE_DATA().then((data) => {
+    dataShow = JSON.parse(data);
+    mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+  });
+};
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
@@ -36,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('hashchange', function() {
   if(location.hash === "#teamlist") {
     mainTag.innerHTML =  CONTENT_LOADER("teamlist", "empty");
+    getTeamListData();
   } else if(location.hash === "#savedteam") {
     mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
   } else {
