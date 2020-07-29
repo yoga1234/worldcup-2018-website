@@ -1,7 +1,7 @@
 const TEAMLIST = (data) => {
   console.log(data);
   let eventData = '';
-  if(data = "empty") {
+  if(data == "empty") {
     eventData = `
       <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
@@ -16,10 +16,29 @@ const TEAMLIST = (data) => {
       </div>
     `;
   } else {
-    eventData = `
-      <h1>Data has been loaded</h1>
-    `;
-  }
+    for(let i = 0; i < data.teams.length; i++) {
+      let teamImage = '';
+      if(data.teams[i].crestUrl == null || data.teams[i].crestUrl == "") {
+        teamImage = './assets/images/not-found.svg';
+      } else {
+        teamImage = data.teams[i].crestUrl;
+      }
+      eventData += `
+      <div class="col s12 m12 l6">
+        <div class="card-panel valign-wrapper">
+          <div class="col s4">
+            <img src="${teamImage}" alt="Country Flag" class="responsive-img">
+          </div>
+          <div class="col s8">
+            <p>Name: ${data.teams[i].name}</p>
+            <p>TLA: ${data.teams[i].tla}</p>
+            <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
+          </div>
+        </div>
+      </div>
+      `;
+    };    
+  };
   window.location.hash = "teamlist";
   return `
     <div class="container">
