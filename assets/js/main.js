@@ -16,11 +16,41 @@ const getHomepageData = () => {
 
 const getTeamListData = () => {
   let dataShow = '';
+  let objectData = {};
   TEAMPAGE_DATA().then((data) => {
     dataShow = JSON.parse(data);
     mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+
+    const detailButton = document.querySelectorAll('.modal-trigger');
+    const instance = M.Modal.getInstance(detailButton);
+    const detailTeam = document.querySelectorAll(".detail-team");
+
+    for(let i = 0; i < detailTeam.length; i++) {
+      detailTeam[i].addEventListener("click", function(e) {
+        console.log(e.target.dataset.target);
+        for(let i = 0; i < dataShow.teams.length; i++) {
+          if(dataShow.teams[i].name == e.target.dataset.target){
+            objectData = {
+              name: dataShow.teams[i].name,
+              tla: dataShow.teams[i].tla,
+              address: dataShow.teams[i].address,
+              phone: dataShow.teams[i].phone,
+              website: dataShow.teams[i].website,
+              email: dataShow.teams[i].email,
+              founded: dataShow.teams[i].founded,
+              clubColors: dataShow.teams[i].clubColors
+            }
+          }
+        }
+        console.info(objectData);
+      });
+    };
   });
 };
+
+const modalTeamDetail = () => {
+
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
@@ -29,10 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // initial page
   mainTag.innerHTML = CONTENT_LOADER("homepage", "empty");
   getHomepageData();
-
-  // initialization parallax
-  const parallaxElems = document.querySelectorAll('.parallax');
-  const instances = M.Parallax.init(parallaxElems, {});
 
   // initialization navbar
   const navbarElems = document.querySelectorAll('.sidenav');

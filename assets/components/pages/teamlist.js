@@ -1,5 +1,4 @@
 const TEAMLIST = (data) => {
-  console.log(data);
   let eventData = '';
   if(data == "empty") {
     eventData = `
@@ -27,12 +26,12 @@ const TEAMLIST = (data) => {
       <div class="col s12 m12 l6">
         <div class="card-panel valign-wrapper">
           <div class="col s4">
-            <img src="${teamImage}" alt="Country Flag" class="responsive-img">
+            <img src="${teamImage}" alt="${data.teams[i].name} Flag" class="responsive-img">
           </div>
           <div class="col s8">
             <p>Name: ${data.teams[i].name}</p>
             <p>TLA: ${data.teams[i].tla}</p>
-            <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
+            <a data-target="${data.teams[i].name}" data-target="modal1" class="waves-effect waves-light btn light-blue accent-4 detail-team">Detail</a>
           </div>
         </div>
       </div>
@@ -46,6 +45,17 @@ const TEAMLIST = (data) => {
       <div class="center">
       <div class="row margin-top-50">
         ${eventData}
+      </div>
+    </div>
+
+    <!-- modal -->
+    <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-green btn-flat">Agree</a>
       </div>
     </div>
 `;
