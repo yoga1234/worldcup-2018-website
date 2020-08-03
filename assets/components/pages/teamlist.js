@@ -31,7 +31,7 @@ const TEAMLIST = (data) => {
           <div class="col s8">
             <p>Name: ${data.teams[i].name}</p>
             <p>TLA: ${data.teams[i].tla}</p>
-            <a data-target="${data.teams[i].name}" data-target="modal1" class="waves-effect waves-light btn light-blue accent-4 detail-team">Detail</a>
+            <a data-team-name="${data.teams[i].name}" class="waves-effect waves-light btn modal-trigger light-blue accent-4 detail-team" href="#team-modal">Detail</a>
           </div>
         </div>
       </div>

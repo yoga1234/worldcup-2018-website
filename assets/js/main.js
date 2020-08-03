@@ -1,4 +1,5 @@
 import NAVBAR from '../components/navbar.js';
+import MODAL from '../components/modal.js'
 import FOOTER from '../components/footer.js';
 import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 
@@ -27,9 +28,9 @@ const getTeamListData = () => {
 
     for(let i = 0; i < detailTeam.length; i++) {
       detailTeam[i].addEventListener("click", function(e) {
-        console.log(e.target.dataset.target);
+        e.preventDefault();
         for(let i = 0; i < dataShow.teams.length; i++) {
-          if(dataShow.teams[i].name == e.target.dataset.target){
+          if(dataShow.teams[i].name == e.target.dataset.teamName){
             objectData = {
               name: dataShow.teams[i].name,
               tla: dataShow.teams[i].tla,
@@ -42,18 +43,19 @@ const getTeamListData = () => {
             }
           }
         }
-        console.info(objectData);
+        modalTeamDetail(objectData);
       });
     };
   });
 };
 
-const modalTeamDetail = () => {
-
+const modalTeamDetail = (teamData) => {
+  
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
+  document.body.insertAdjacentHTML("beforeend", MODAL);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
   // initial page
@@ -63,6 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // initialization navbar
   const navbarElems = document.querySelectorAll('.sidenav');
   const navbarInstances = M.Sidenav.init(navbarElems, {});
+
+  // modal
+  let modalElem = document.querySelectorAll('.modal');
+  let modalInstances = M.Modal.init(modalElem, {
+    preventScrolling: true
+  })
 });
 
 // changing the content
