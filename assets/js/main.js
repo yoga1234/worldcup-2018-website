@@ -7,6 +7,7 @@ import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 import CONTENT_LOADER from './contentLoader.js';
 
 let mainTag = document.getElementsByTagName('main')[0];
+let modalData = {}
 
 const getHomepageData = () => {
   let dataShow = '';
@@ -46,6 +47,7 @@ const getTeamListData = () => {
           }
         }
         MODAL_TEAM_DETAIL(objectData);
+        modalData = objectData;
       });
     };
   });
@@ -74,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
   modalClose.addEventListener("click", function(e) {
     e.preventDefault();
     // document.querySelector(".modal-content").scrollTop = 0;
-    console.log(document.querySelector(".modal-content").scrollTop);
     M.Modal.getInstance(modalElem[0]).close();
   });
 
@@ -82,6 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
     console.log("Tombol save telah di klik.")
+    console.log(modalData);
+    saveTeamData(modalData);
   });
 });
 
