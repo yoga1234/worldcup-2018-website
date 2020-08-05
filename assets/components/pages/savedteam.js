@@ -37,8 +37,10 @@ const SAVEDTEAM = (data) => {
   return `
     <div class="container">
       <h4 class="center-align">Saved Teams</h4>
-      <div class="row">
-        ${eventData}
+      <div class="center">
+        <div class="row">
+          ${eventData}
+        </div>
       </div>
     </div>
   `;

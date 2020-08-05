@@ -43,8 +43,9 @@ const TEAMLIST = (data) => {
     <div class="container">
       <h4 class="center-align">Team List</h4>
       <div class="center">
-      <div class="row margin-top-50">
-        ${eventData}
+        <div class="row margin-top-50">
+          ${eventData}
+        </div>
       </div>
     </div>
 `;

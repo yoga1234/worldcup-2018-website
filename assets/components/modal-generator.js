@@ -8,6 +8,7 @@ const MODAL_TEAM_DETAIL = (teamData) => {
   let teamEmail = document.querySelector(".team-email");
   let teamFounded = document.querySelector(".team-founded");
   let teamColors = document.querySelector(".team-colors");
+  let modalDynamicButton = document.querySelector(".modal-footer");
 
   // check for country flag
   if(teamData.crestUrl == null || teamData.crestUrl == "") {

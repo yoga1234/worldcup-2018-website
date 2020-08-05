@@ -7,13 +7,13 @@ import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 import CONTENT_LOADER from './contentLoader.js';
 
 let mainTag = document.getElementsByTagName('main')[0];
-let dataShow = '';
-let objectData = {};
-let modalData = {};
+let dataShow = ''; // first initial data
+let objectData = {}; // data used for modal
+let modalData = {}; // for saving data
 
 
 // modal event
-const modalClickEvent = () => {
+const modalClickEvent = (page) => {
   
   const detailButton = document.querySelectorAll('.modal-trigger');
   const instance = M.Modal.getInstance(detailButton);
@@ -38,7 +38,7 @@ const modalClickEvent = () => {
         }
       }
       // generate data into modal
-      MODAL_TEAM_DETAIL(objectData);
+      MODAL_TEAM_DETAIL(objectData, page);
       // modal data for saving into indexeddb
       modalData = objectData;
     });
@@ -46,7 +46,6 @@ const modalClickEvent = () => {
 }
 
 const getHomepageData = () => {
-  let dataShow = '';
   HOMEPAGE_DATA().then((data) => {
     dataShow = JSON.parse(data);
     mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
@@ -57,7 +56,6 @@ const getSavepageData = () => {
   getAllTeam().then(function(data) {
     console.log(data);
     mainTag.innerHTML = CONTENT_LOADER("savedteam", data);
-    console.log(dataShow);
 
     modalClickEvent();
   });
@@ -68,7 +66,6 @@ const getTeamListData = () => {
     dataShow = JSON.parse(data);
     dataShow = dataShow.teams;
     mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
-    console.log(dataShow);
 
     modalClickEvent();
   });
