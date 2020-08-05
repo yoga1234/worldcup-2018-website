@@ -7,7 +7,43 @@ import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 import CONTENT_LOADER from './contentLoader.js';
 
 let mainTag = document.getElementsByTagName('main')[0];
-let modalData = {}
+let dataShow = '';
+let objectData = {};
+let modalData = {};
+
+
+// modal event
+const modalClickEvent = () => {
+  
+  const detailButton = document.querySelectorAll('.modal-trigger');
+  const instance = M.Modal.getInstance(detailButton);
+  const detailTeam = document.querySelectorAll(".detail-team");
+
+  for(let i = 0; i < detailTeam.length; i++) {
+    detailTeam[i].addEventListener("click", function(e) {
+      e.preventDefault();
+      for(let i = 0; i < dataShow.length; i++) {
+        if(dataShow[i].name == e.target.dataset.teamName){
+          objectData = {
+            name: dataShow[i].name,
+            tla: dataShow[i].tla,
+            address: dataShow[i].address,
+            crestUrl: dataShow[i].crestUrl,
+            phone: dataShow[i].phone,
+            website: dataShow[i].website,
+            email: dataShow[i].email,
+            founded: dataShow[i].founded,
+            clubColors: dataShow[i].clubColors
+          }
+        }
+      }
+      // generate data into modal
+      MODAL_TEAM_DETAIL(objectData);
+      // modal data for saving into indexeddb
+      modalData = objectData;
+    });
+  };
+}
 
 const getHomepageData = () => {
   let dataShow = '';
@@ -20,43 +56,21 @@ const getHomepageData = () => {
 const getSavepageData = () => {
   getAllTeam().then(function(data) {
     console.log(data);
-    mainTag.innerHTML = CONTENT_LOADER("savedteam", data)
+    mainTag.innerHTML = CONTENT_LOADER("savedteam", data);
+    console.log(dataShow);
+
+    modalClickEvent();
   });
-}
+};
 
 const getTeamListData = () => {
-  let dataShow = '';
-  let objectData = {};
   TEAMPAGE_DATA().then((data) => {
     dataShow = JSON.parse(data);
+    dataShow = dataShow.teams;
     mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+    console.log(dataShow);
 
-    const detailButton = document.querySelectorAll('.modal-trigger');
-    const instance = M.Modal.getInstance(detailButton);
-    const detailTeam = document.querySelectorAll(".detail-team");
-
-    for(let i = 0; i < detailTeam.length; i++) {
-      detailTeam[i].addEventListener("click", function(e) {
-        e.preventDefault();
-        for(let i = 0; i < dataShow.teams.length; i++) {
-          if(dataShow.teams[i].name == e.target.dataset.teamName){
-            objectData = {
-              name: dataShow.teams[i].name,
-              tla: dataShow.teams[i].tla,
-              address: dataShow.teams[i].address,
-              crestUrl: dataShow.teams[i].crestUrl,
-              phone: dataShow.teams[i].phone,
-              website: dataShow.teams[i].website,
-              email: dataShow.teams[i].email,
-              founded: dataShow.teams[i].founded,
-              clubColors: dataShow.teams[i].clubColors
-            }
-          }
-        }
-        MODAL_TEAM_DETAIL(objectData);
-        modalData = objectData;
-      });
-    };
+    modalClickEvent();
   });
 };
 

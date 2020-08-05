@@ -1,6 +1,7 @@
 import HOMEPAGE from '../components/pages/homepage.js';
 import TEAMLIST from '../components/pages/teamlist.js';
 import SAVEDTEAM from '../components/pages/savedTeam.js';
+import FOOTER from '../components/footer.js';
 
 const CONTENT_LOADER = (page, data) => {
   switch(page) {

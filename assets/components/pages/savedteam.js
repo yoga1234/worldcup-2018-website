@@ -25,7 +25,7 @@ const SAVEDTEAM = (data) => {
           <div class="col s8">
             <p>Name: ${data[i].name}</p>
             <p>TLA: ${data[i].name}</p>
-            <a class="waves-effect waves-light btn light-blue accent-4">Detail</a>
+            <a data-team-name="${data[i].name}" class="waves-effect waves-light btn modal-trigger light-blue accent-4 detail-team" href="#team-modal">Detail</a>
           </div>
         </div>
       </div>
@@ -35,12 +35,12 @@ const SAVEDTEAM = (data) => {
   console.log("This is from savedteam: " + data);
   window.location.hash = "savedteam";
   return `
-  <div class="container">
-  <h4 class="center-align">Saved Teams</h4>
-  <div class="row">
-    ${eventData}
-  </div>
-</div>
+    <div class="container">
+      <h4 class="center-align">Saved Teams</h4>
+      <div class="row">
+        ${eventData}
+      </div>
+    </div>
   `;
 }
 

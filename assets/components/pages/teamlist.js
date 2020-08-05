@@ -15,23 +15,23 @@ const TEAMLIST = (data) => {
       </div>
     `;
   } else {
-    for(let i = 0; i < data.teams.length; i++) {
+    for(let i = 0; i < data.length; i++) {
       let teamImage = '';
-      if(data.teams[i].crestUrl == null || data.teams[i].crestUrl == "") {
+      if(data[i].crestUrl == null || data[i].crestUrl == "") {
         teamImage = './assets/images/not-found.svg';
       } else {
-        teamImage = data.teams[i].crestUrl;
+        teamImage = data[i].crestUrl;
       }
       eventData += `
       <div class="col s12 m12 l6">
         <div class="card-panel valign-wrapper">
           <div class="col s4">
-            <img src="${teamImage}" alt="${data.teams[i].name} Flag" class="responsive-img">
+            <img src="${teamImage}" alt="${data[i].name} Flag" class="responsive-img">
           </div>
           <div class="col s8">
-            <p>Name: ${data.teams[i].name}</p>
-            <p>TLA: ${data.teams[i].tla}</p>
-            <a data-team-name="${data.teams[i].name}" class="waves-effect waves-light btn modal-trigger light-blue accent-4 detail-team" href="#team-modal">Detail</a>
+            <p>Name: ${data[i].name}</p>
+            <p>TLA: ${data[i].tla}</p>
+            <a data-team-name="${data[i].name}" class="waves-effect waves-light btn modal-trigger light-blue accent-4 detail-team" href="#team-modal">Detail</a>
           </div>
         </div>
       </div>
@@ -45,17 +45,6 @@ const TEAMLIST = (data) => {
       <div class="center">
       <div class="row margin-top-50">
         ${eventData}
-      </div>
-    </div>
-
-    <!-- modal -->
-    <div id="modal1" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-green btn-flat">Agree</a>
       </div>
     </div>
 `;
