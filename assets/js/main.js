@@ -1,6 +1,7 @@
 import NAVBAR from '../components/navbar.js';
 import MODAL from '../components/modal.js'
 import FOOTER from '../components/footer.js';
+import MODAL_TEAM_DETAIL from '../components/modal-generator.js';
 import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
 
 import CONTENT_LOADER from './contentLoader.js';
@@ -35,6 +36,7 @@ const getTeamListData = () => {
               name: dataShow.teams[i].name,
               tla: dataShow.teams[i].tla,
               address: dataShow.teams[i].address,
+              crestUrl: dataShow.teams[i].crestUrl,
               phone: dataShow.teams[i].phone,
               website: dataShow.teams[i].website,
               email: dataShow.teams[i].email,
@@ -43,31 +45,44 @@ const getTeamListData = () => {
             }
           }
         }
-        modalTeamDetail(objectData);
+        MODAL_TEAM_DETAIL(objectData);
       });
     };
   });
 };
 
-const modalTeamDetail = (teamData) => {
-  let teamName = document.querySelector(".team-name");
-  let teamTla = document.querySelector(".team-tla");
-  let teamAddress = document.querySelector(".team-address");
-  let teamPhone = document.querySelector(".team-phone");
-  let teamWebsite = document.querySelector(".team-website");
-  let teamEmail = document.querySelector(".team-email");
-  let teamFounded = document.querySelector(".team-founded");
-  let teamColors = document.querySelector(".team-colors");
+// const modalTeamDetail = (teamData) => {
+//   let countryFlag = document.querySelector(".modal-flag-image");
+//   let teamName = document.querySelector(".team-name");
+//   let teamTla = document.querySelector(".team-tla");
+//   let teamAddress = document.querySelector(".team-address");
+//   let teamPhone = document.querySelector(".team-phone");
+//   let teamWebsite = document.querySelector(".team-website");
+//   let teamEmail = document.querySelector(".team-email");
+//   let teamFounded = document.querySelector(".team-founded");
+//   let teamColors = document.querySelector(".team-colors");
 
-  teamName.innerHTML = "Name: <strong>" + teamData.name + "</strong>";
-  teamTla.innerHTML = "Tla: <strong>" + teamData.tla + "</strong>";
-  teamAddress.innerHTML = "Address: <strong>" + teamData.address + "</strong>";
-  teamPhone.innerHTML = "Phone: <strong>" + teamData.phone + "</strong>";
-  teamWebsite.innerHTML = "Website: <strong>" + teamData.website + "</strong>";
-  teamEmail.innerHTML = "Email: <strong>" + teamData.email + "</strong>";
-  teamFounded.innerHTML = "Founded: <strong>" + teamData.founded + "</strong>";
-  teamColors.innerHTML = "Club Colors: <strong>" + teamData.clubColors + "</strong>";
-}
+//   // check for country flag
+//   if(teamData.crestUrl == null || teamData.crestUrl == "") {
+//     teamData.crestUrl = './assets/images/not-found.svg';
+//   }
+
+//   // check for email
+//   if(teamData.email == null || teamData.email == "") {
+//     teamEmail.innerHTML = "Email: <i>Email not available</i>";
+//   } else {
+//     teamEmail.innerHTML = "Email: <strong>" + teamData.email + "</strong>";
+//   }
+
+//   countryFlag.src = teamData.crestUrl;
+//   teamName.innerHTML = "Name: <strong>" + teamData.name + "</strong>";
+//   teamTla.innerHTML = "Tla: <strong>" + teamData.tla + "</strong>";
+//   teamAddress.innerHTML = "Address: <strong>" + teamData.address + "</strong>";
+//   teamPhone.innerHTML = "Phone: <strong>" + teamData.phone + "</strong>";
+//   teamWebsite.innerHTML = "Website: <strong>" + teamData.website + "</strong>";
+//   teamFounded.innerHTML = "Founded: <strong>" + teamData.founded + "</strong>";
+//   teamColors.innerHTML = "Club Colors: <strong>" + teamData.clubColors + "</strong>";
+// }
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
@@ -94,12 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(document.querySelector(".modal-content").scrollTop);
     M.Modal.getInstance(modalElem[0]).close();
   });
-  let modalContent = document.querySelector(".modal-content");
-  modalContent.addEventListener("scroll", function (event) {
-    var scroll = modalContent.scrollTop;
-    console.log("Scroll Top: " + modalContent.scrollTop);
-    console.log("Offset: " + modalContent.offsetTop);
-  });
+  
 });
 
 
