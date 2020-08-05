@@ -17,6 +17,13 @@ const getHomepageData = () => {
   });
 };
 
+const getSavepageData = () => {
+  getAllTeam().then(function(data) {
+    console.log(data);
+    mainTag.innerHTML = CONTENT_LOADER("savedteam", data)
+  });
+}
+
 const getTeamListData = () => {
   let dataShow = '';
   let objectData = {};
@@ -97,6 +104,7 @@ window.addEventListener('hashchange', function() {
     getTeamListData();
   } else if(location.hash === "#savedteam") {
     mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
+    getSavepageData();
   } else {
     mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
     getHomepageData();

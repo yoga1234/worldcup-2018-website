@@ -7,6 +7,7 @@ let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
   teamObjectStore.createIndex("name", "name", { unique: false});
 });
 
+// saving function
 function saveTeamData(data) {
   dbPromised
   .then(function(db) {
@@ -21,5 +22,23 @@ function saveTeamData(data) {
   })
   .catch(function(err) {
     console.log(err);
+  })
+};
+
+// get data function
+function getAllTeam() {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teams", "readonly");
+      let store = tx.objectStore("teams");
+      return store.getAll();
+    })
+    .then(function(teams) {
+      resolve(teams);
+    })
+    .catch(function(err) {
+      console.log(err);
+    })
   })
 }

@@ -9,7 +9,7 @@ const CONTENT_LOADER = (page, data) => {
     case "teamlist":
       return TEAMLIST(data);
     case "savedteam":
-      return SAVEDTEAM();
+      return SAVEDTEAM(data);
   }
 }
 
