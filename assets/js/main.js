@@ -22,8 +22,9 @@ const modalClickEvent = (page) => {
     detailTeam[i].addEventListener("click", function(e) {
       e.preventDefault();
       for(let i = 0; i < dataShow.length; i++) {
-        if(dataShow[i].name == e.target.dataset.teamName){
+        if(dataShow[i].name == e.target.dataset.teamName.split("|")[0]){
           objectData = {
+            id: dataShow[i].id,
             name: dataShow[i].name,
             tla: dataShow[i].tla,
             address: dataShow[i].address,
@@ -53,7 +54,10 @@ const getHomepageData = () => {
 
 const getSavepageData = () => {
   getAllTeam().then(function(data) {
-    console.log(data);
+    dataShow = data;
+    console.log("data: " + data);
+    console.log("dataShow: " + dataShow);
+
     mainTag.innerHTML = CONTENT_LOADER("savedteam", data);
 
     modalClickEvent("savedteam");
@@ -92,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
   let modalClose = document.querySelector(".close-modal-btn");
   modalClose.addEventListener("click", function(e) {
     e.preventDefault();
-    // document.querySelector(".modal-content").scrollTop = 0;
     M.Modal.getInstance(modalElem[0]).close();
   });
 
@@ -100,9 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
     if(e.target.innerText == "SAVE TEAM") {
-      // saveTeamData(modalData);
+      saveTeamData(modalData);
+      M.toast({html: "Team Berhasil disimpan"});
     } else {
-      console.log("Remove From Saved");
+      deleteTeam(objectData.id)
+      .then(function(resolve) {
+        M.Modal.getInstance(modalElem[0]).close();
+        getSavepageData();
+        M.toast({html: resolve});
+
+      })
     }
   });
 });

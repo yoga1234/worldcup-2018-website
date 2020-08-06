@@ -1,8 +1,7 @@
 let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
   // creating object store
   let teamObjectStore = upgradeDb.createObjectStore("teams", {
-    keyPath: "ID",
-    autoIncrement: true
+    keyPath: "id"
   });
   teamObjectStore.createIndex("name", "name", { unique: false});
 });
@@ -22,7 +21,7 @@ function saveTeamData(data) {
   })
   .catch(function(err) {
     console.log(err);
-  })
+  });
 };
 
 // get data function
@@ -39,6 +38,24 @@ function getAllTeam() {
     })
     .catch(function(err) {
       console.log(err);
+    });
+  });
+};
+
+// delete data function
+function deleteTeam(idTeam) {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teams", "readwrite");
+      let store = tx.objectStore("teams");
+      return store.delete(idTeam);
+    })
+    .then(function() {
+      resolve("Team deleted");
+    })
+    .catch(function(err) {
+      reject("Something error: " + err);
     })
   })
 }
