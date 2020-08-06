@@ -36,7 +36,7 @@ const MODAL = `
     </div> <!-- card-panel teal-->
   </div> <!-- modal-content -->
   <div class="modal-footer">
-    <a class="waves-effect waves-light btn indigo accent-4 save-modal-btn">Save Team</a>
+    <a id="modal-dynamic-btn" class="waves-effect waves-light btn indigo accent-4 save-modal-btn">Save Team</a>
     <a class="waves-effect waves-light btn red close-modal-btn">Close</a>
   </div> <!-- modal-footer -->
   </div> <!-- modal modal-fixed-footer -->

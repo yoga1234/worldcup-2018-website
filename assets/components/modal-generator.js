@@ -1,4 +1,4 @@
-const MODAL_TEAM_DETAIL = (teamData) => {
+const MODAL_TEAM_DETAIL = (teamData, page) => {
   let countryFlag = document.querySelector(".modal-flag-image");
   let teamName = document.querySelector(".team-name");
   let teamTla = document.querySelector(".team-tla");
@@ -8,7 +8,17 @@ const MODAL_TEAM_DETAIL = (teamData) => {
   let teamEmail = document.querySelector(".team-email");
   let teamFounded = document.querySelector(".team-founded");
   let teamColors = document.querySelector(".team-colors");
-  let modalDynamicButton = document.querySelector(".modal-footer");
+  let modalDynamicButton = document.getElementById("modal-dynamic-btn");
+
+  if(page == "savedteam") {
+    modalDynamicButton.classList.remove("indigo");
+    modalDynamicButton.classList.add("red");
+    modalDynamicButton.innerText ="Remove From saved";
+  } else {
+    modalDynamicButton.classList.remove("red");
+    modalDynamicButton.classList.add("indigo");
+    modalDynamicButton.innerText = "Save Team";
+  }
 
   // check for country flag
   if(teamData.crestUrl == null || teamData.crestUrl == "") {

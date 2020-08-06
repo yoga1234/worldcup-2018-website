@@ -11,7 +11,6 @@ let dataShow = ''; // first initial data
 let objectData = {}; // data used for modal
 let modalData = {}; // for saving data
 
-
 // modal event
 const modalClickEvent = (page) => {
   
@@ -57,7 +56,7 @@ const getSavepageData = () => {
     console.log(data);
     mainTag.innerHTML = CONTENT_LOADER("savedteam", data);
 
-    modalClickEvent();
+    modalClickEvent("savedteam");
   });
 };
 
@@ -67,7 +66,7 @@ const getTeamListData = () => {
     dataShow = dataShow.teams;
     mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
 
-    modalClickEvent();
+    modalClickEvent("teamlist");
   });
 };
 
@@ -100,9 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // modal save button
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
-    console.log("Tombol save telah di klik.")
-    console.log(modalData);
-    saveTeamData(modalData);
+    if(e.target.innerText == "SAVE TEAM") {
+      // saveTeamData(modalData);
+    } else {
+      console.log("Remove From Saved");
+    }
   });
 });
 
