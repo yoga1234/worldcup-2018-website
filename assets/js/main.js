@@ -75,7 +75,7 @@ const getHomepageData = () => {
           mainTag.innerHTML = CONTENT_LOADER("homepage", "database");
         });
       } else {
-        console.log("data ada di database");
+        console.log("data homepage ada di database");
         mainTag.innerHTML = CONTENT_LOADER("homepage", response);
       }
     })  
@@ -98,20 +98,31 @@ const getSavepageData = () => {
 };
 
 const getTeamListData = () => {
-  TEAMPAGE_DATA().then((data) => {
-    dataShow = JSON.parse(data);
-    dataShow = dataShow.teams;
-    mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+  // check data in the indexeddb
+  getIndexTeamlistData()
+  .then(function(response) {
+    console.log(response)
+    if(response == undefined || response.length == 0) {
+      console.log("data teamlist tidak ditemukan di database");
+      console.log("getting data from API");
+      TEAMPAGE_DATA().then((data) => {
+        dataShow = JSON.parse(data);
+        dataShow = dataShow.teams;
+        mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+        
+        // save teamlist into indexeddb
+        saveTeamlistData(dataShow);
+        modalClickEvent("teamlist");
+      });
+    } else {
+      console.log("data teamlist dalam database ditemukan");
+      mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+  })
 
-    // saveTeamlistData(dataShow)
-    // .then(function(response){
-    //   console.log(response);
-    // })
-    // .catch(function(err) {
-    //   console.log(err);
-    // })
-    modalClickEvent("teamlist");
-  });
 };
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -50,7 +50,7 @@ function getIndexHomeData() {
 };
 
 // get teamlist data
-function getTeamlistData() {
+function getIndexTeamlistData() {
   return new Promise(function(resolve, reject) {
     dbPromised
     .then(function(db) {
