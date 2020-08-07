@@ -103,6 +103,13 @@ const getTeamListData = () => {
     dataShow = dataShow.teams;
     mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
 
+    // saveTeamlistData(dataShow)
+    // .then(function(response){
+    //   console.log(response);
+    // })
+    // .catch(function(err) {
+    //   console.log(err);
+    // })
     modalClickEvent("teamlist");
   });
 };
@@ -113,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
   // initial page
-  mainTag.innerHTML = CONTENT_LOADER("homepage", "empty");
   getHomepageData();
 
   // initialization navbar

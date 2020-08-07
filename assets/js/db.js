@@ -6,6 +6,10 @@ let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
   let homepageObjectStore = upgradeDb.createObjectStore("homepage", {
     keyPath: "name",
   });
+  let teamListObjectStore = upgradeDb.createObjectStore("teamlist", {
+    keyPath: "id",
+    autoIncrement: true
+  })
   teamObjectStore.createIndex("name", "name", { unique: false});
 });
 
@@ -43,6 +47,42 @@ function getIndexHomeData() {
       reject(err);
     });
   });
+};
+
+// get teamlist data
+function getTeamlistData() {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teamlist", "readonly");
+      let store = tx.objectStore("teamlist");
+      return store.getAll();
+    })
+    .then(function(teams) {
+      resolve(teams);
+    })
+    .catch(function(err) {
+      reject(err);
+    });
+  });
+};
+
+// save teamlist data
+function saveTeamlistData(data) {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teamlist", "readwrite");
+      let store = tx.objectStore("teamlist");
+      return store.add(data);
+    })
+    .then(function() {
+      resolve("Teamlist berhasil disimpan")
+    })
+    .catch(function(err) {
+      reject(err);
+    })
+  })
 }
 
 // saving savedteam function
