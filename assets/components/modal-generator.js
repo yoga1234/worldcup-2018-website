@@ -1,4 +1,4 @@
-const MODAL_TEAM_DETAIL = (teamData, page) => {
+const MODAL_TEAM_DETAIL = (teamData, page, checkData) => {
   console.log(teamData);
   let countryFlag = document.querySelector(".modal-flag-image");
   let teamName = document.querySelector(".team-name");
@@ -16,9 +16,17 @@ const MODAL_TEAM_DETAIL = (teamData, page) => {
     modalDynamicButton.classList.add("red");
     modalDynamicButton.innerText ="Remove From saved";
   } else {
-    modalDynamicButton.classList.remove("red");
-    modalDynamicButton.classList.add("indigo");
-    modalDynamicButton.innerText = "Save Team";
+    if(checkData != undefined ) {
+      modalDynamicButton.classList.remove("red");
+      modalDynamicButton.classList.add("indigo");
+      modalDynamicButton.classList.add("disabled");
+      modalDynamicButton.innerText = "Team Already Saved.";
+    } else {
+      modalDynamicButton.classList.remove("red");
+      modalDynamicButton.classList.remove("disabled");
+      modalDynamicButton.classList.add("indigo");
+      modalDynamicButton.innerText = "Save Team";
+    }
   }
 
   // check for country flag

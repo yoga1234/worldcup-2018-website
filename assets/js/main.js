@@ -37,8 +37,10 @@ const modalClickEvent = (page) => {
           }
         }
       }
-      // generate data into modal
-      MODAL_TEAM_DETAIL(objectData, page);
+      checkData(objectData.id)
+      .then(function(resolve) {
+        MODAL_TEAM_DETAIL(objectData, page, resolve)
+      })
       // modal data for saving into indexeddb
       modalData = objectData;
     });
@@ -103,8 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
     if(e.target.innerText == "SAVE TEAM") {
-      saveTeamData(modalData);
-      M.toast({html: "Team Berhasil disimpan"});
+      saveTeamData(modalData)
+      .then(function() {
+        M.toast({html: "Team Berhasil disimpan"});
+      }).catch(function(err) {
+        console.log("error: " + err);
+      });
     } else {
       deleteTeam(objectData.id)
       .then(function(resolve) {

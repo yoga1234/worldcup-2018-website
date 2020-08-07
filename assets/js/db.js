@@ -8,21 +8,39 @@ let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
 
 // saving function
 function saveTeamData(data) {
-  dbPromised
-  .then(function(db) {
-    let tx = db.transaction("teams", "readwrite");
-    let store = tx.objectStore("teams");
-    console.log(data);
-    store.add(data);
-    return tx.complete;
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teams", "readwrite");
+      let store = tx.objectStore("teams");
+      return store.add(data);
+    })
+    .then(function() {
+      resolve("Team berhasil disimpan");
+    })
+    .catch(function(err) {
+      reject(err);
+    });
   })
-  .then(function() {
-    console.log("Team berhasil disimpan");
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
 };
+
+// check for a data
+function checkData(dataId) {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("teams", "readonly");
+      let store = tx.objectStore("teams");
+      return store.get(dataId);
+    })
+    .then(function(data) {
+      resolve(data)
+    })
+    .catch(function(err) {
+      reject(err)
+    })
+  })
+}
 
 // get data function
 function getAllTeam() {
@@ -37,7 +55,7 @@ function getAllTeam() {
       resolve(teams);
     })
     .catch(function(err) {
-      console.log(err);
+      reject(err);
     });
   });
 };
