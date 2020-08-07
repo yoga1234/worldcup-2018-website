@@ -1,0 +1,14 @@
+// check if data already saved
+    getIndexHomeData(dataShow.name)
+    .then(function(response) {
+      if(response == undefined) {
+        console.log("data homepage belum ada di database");
+        saveHomepageData(dataShow);
+      } else {
+        dataShow = response;
+        mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow)
+      }
+    })
+    .catch(function(err) {
+      console.log("Oops terjadi error: " + err);
+    })

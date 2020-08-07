@@ -1,7 +1,6 @@
 import HOMEPAGE from '../components/pages/homepage.js';
 import TEAMLIST from '../components/pages/teamlist.js';
 import SAVEDTEAM from '../components/pages/savedTeam.js';
-import FOOTER from '../components/footer.js';
 
 const CONTENT_LOADER = (page, data) => {
   switch(page) {
@@ -11,6 +10,8 @@ const CONTENT_LOADER = (page, data) => {
       return TEAMLIST(data);
     case "savedteam":
       return SAVEDTEAM(data);
+    case "errorpage":
+      return ERRORPAGE();
   }
 }
 

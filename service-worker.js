@@ -26,44 +26,41 @@ let urlsToCache = [
   "/assets/js/materialize.min.js"
 ];
 
-// // adding cache
-// self.addEventListener("install", function(event) {
-//   event.waitUntil(
-//     caches.open(CACHE_NAME).then(function(cache) {
-//       return cache.addAll(urlsToCache);
-//     })
-//   );
-// });
+// adding cache
+self.addEventListener("install", function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
 
-// // cache if available
-// self.addEventListener("fetch", function(event) {
-//   event.respondWith(
-//     caches
-//       .match(event.request, { cacheName: CACHE_NAME})
-//       .then(function(response) {
-//         if(response) {
-//           console.log("service worker: ", response.url);
-//           return response;
-//         }
+// cache if available
+self.addEventListener("fetch", function(event) {
+  event.respondWith(
+    caches
+      .match(event.request, { cacheName: CACHE_NAME})
+      .then(function(response) {
+        if(response != undefined) {
+          return response;
+        }
+        
+        return fetch(event.request);
+      })
+  );
+});
 
-//         console.log("Server: ", event.request.url);
-//         return fetch(event.request);
-//       })
-//   );
-// });
-
-// // deleting old cache
-// self.addEventListener("activate", function(event) {
-//   event.waitUntil(
-//     caches.keys().then(function(cacheNames) {
-//       return Promise.all(
-//         cacheNames.map(function(cacheName) {
-//           if(cacheNames != CACHE_NAME) {
-//             console.log("Service Worker: Cache " + cacheName + " dihapus");
-//             return caches.delete(cacheName);
-//           }
-//         })
-//       );
-//     })
-//   );
-// });
+// deleting old cache
+self.addEventListener("activate", function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if(cacheNames != CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});

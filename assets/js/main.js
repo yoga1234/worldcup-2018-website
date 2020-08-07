@@ -49,10 +49,40 @@ const modalClickEvent = (page) => {
 }
 
 const getHomepageData = () => {
-  HOMEPAGE_DATA().then((data) => {
-    dataShow = JSON.parse(data);
-    mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
-  });
+  // check if data already exists in the indexeddb
+  getIndexHomeData()
+    .then(function(response) {
+      if(response == undefined) {
+        console.log("data homepage belum ada di database");
+        // getting data from API
+        HOMEPAGE_DATA()
+        .then((data) => {
+          dataShow = JSON.parse(data);
+          dataShow = {
+            name: dataShow.name,
+            code: dataShow.code,
+            stage: dataShow.area.name,
+            start: dataShow.currentSeason.startDate,
+            end: dataShow.currentSeason.endDate,
+          };
+          // save data into database
+          saveHomepageData(dataShow);
+          mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
+        })
+        .catch((err) => {
+          // HOMEPAGE_DATA error
+          console.log("Offline mode");
+          mainTag.innerHTML = CONTENT_LOADER("homepage", "database");
+        });
+      } else {
+        console.log("data ada di database");
+        mainTag.innerHTML = CONTENT_LOADER("homepage", response);
+      }
+    })  
+    .catch(function(err) {
+      // getIndexData error
+      console.log("Oops terjadi error: " + err);
+    })
 };
 
 const getSavepageData = () => {

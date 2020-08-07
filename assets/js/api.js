@@ -34,9 +34,4 @@ const TEAMPAGE_DATA = () => {
   })
 };
 
-// getting single team data
-const SINGLETEAM_DATA = () => {
-  
-};
-
 export {HOMEPAGE_DATA, TEAMPAGE_DATA};

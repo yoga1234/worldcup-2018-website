@@ -14,6 +14,8 @@ const HOMEPAGE = (data) => {
         </div>
       </div>
     `;
+  } if(data == "database") {
+    eventData = `<h5 class="margin-top-50 center-align light">Oops, Someting is wrong :(</h5>`;
   } else {
     eventData = `
       <div class="col s12 m12 l4">
@@ -31,19 +33,19 @@ const HOMEPAGE = (data) => {
       <div class="col s12 m12 l4">
         <div class="card-panel">
           <h5>Stage: </h5>
-          <p>${data.area.name}</p>
+          <p>${data.stage}</p>
         </div>
       </div>
       <div class="col s12 m12 l6">
         <div class="card-panel">
           <h5>Start Date: </h5>
-          <p>${data.currentSeason.startDate}</p>
+          <p>${data.start}</p>
         </div>
       </div>
       <div class="col s12 m12 l6">
         <div class="card-panel">
           <h5>End Date: </h5>
-          <p>${data.currentSeason.endDate}</p>
+          <p>${data.end}</p>
         </div>
       </div>
     `;
@@ -65,7 +67,7 @@ const HOMEPAGE = (data) => {
         </div>
       </div>
       <div class="row">
-        <div class="center">
+        <div class="center margin-top-50">
           <h4 class="thin">This website offers:</h4>
         </div>
         <div class="col s12 m4 l4">

@@ -15,7 +15,7 @@ const SAVEDTEAM = (data) => {
     </div>
     `;
   } else if(data == "") {
-    eventData = '<h5 class="margin-top-50 center-align light">No Team Saved.</h5>'
+    eventData = '<h5 class="margin-top-50 center-align light">No Team Saved.</h5>';
   } else {
     for(let i = 0; i < data.length; i++) {
       eventData += `
