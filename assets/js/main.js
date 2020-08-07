@@ -37,6 +37,7 @@ const modalClickEvent = (page) => {
           }
         }
       }
+      // check if data exists first
       checkData(objectData.id)
       .then(function(resolve) {
         MODAL_TEAM_DETAIL(objectData, page, resolve)
@@ -108,6 +109,14 @@ document.addEventListener('DOMContentLoaded', function() {
       saveTeamData(modalData)
       .then(function() {
         M.toast({html: "Team Berhasil disimpan"});
+        modalSave.classList.add("disabled");
+        modalSave.innerHTML = "Loading...";
+        checkData(objectData.id)
+        .then(function(resolve) {
+          if(resolve != undefined) {
+            modalSave.innerHTML = "Success Adding to Saved."
+          }
+        })
       }).catch(function(err) {
         console.log("error: " + err);
       });
