@@ -79,7 +79,6 @@ function saveTeamlistData(data) {
       } else {
         return store.add(data);
       }
-      // return store.add(data);
     })
     .then(function(response) {
       resolve(response)
