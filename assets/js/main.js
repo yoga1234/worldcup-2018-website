@@ -163,12 +163,14 @@ const getTeamListData = () => {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("hash: " + location.hash);
   document.body.insertAdjacentHTML("afterbegin", NAVBAR);
   document.body.insertAdjacentHTML("beforeend", MODAL);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
-  // initial page
-  mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
+  if(location.hash == "") {
+    location.hash = "#homepage"
+  }
 
   // initialization navbar
   const navbarElems = document.querySelectorAll('.sidenav');
@@ -227,7 +229,10 @@ window.addEventListener('hashchange', function() {
   } else if(location.hash === "#savedteam") {
     mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
     getSavepageData();
-  } else {
+  } else if(location.hash === "#homepage"){
+    mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
+    getHomepageData();
+  } else if(location.hash == ""){
     mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
     getHomepageData();
   }
