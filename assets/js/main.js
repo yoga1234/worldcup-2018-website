@@ -20,19 +20,20 @@ const modalClickEvent = (page) => {
   for(let i = 0; i < detailTeam.length; i++) {
     detailTeam[i].addEventListener("click", function(e) {
       e.preventDefault();
-      for(let i = 0; i < dataShow.teams.length; i++) {
-        if(dataShow.teams[i].name == e.target.dataset.teamName.split("|")[0]){
+      console.log("dataShow: " + JSON.stringify(dataShow));
+      for(let i = 0; i < dataShow.length; i++) {
+        if(dataShow[i].name == e.target.dataset.teamName.split("|")[0]){
           objectData = {
-            id: dataShow.teams[i].id,
-            name: dataShow.teams[i].name,
-            tla: dataShow.teams[i].tla,
-            address: dataShow.teams[i].address,
-            crestUrl: dataShow.teams[i].crestUrl,
-            phone: dataShow.teams[i].phone,
-            website: dataShow.teams[i].website,
-            email: dataShow.teams[i].email,
-            founded: dataShow.teams[i].founded,
-            clubColors: dataShow.teams[i].clubColors
+            id: dataShow[i].id,
+            name: dataShow[i].name,
+            tla: dataShow[i].tla,
+            address: dataShow[i].address,
+            crestUrl: dataShow[i].crestUrl,
+            phone: dataShow[i].phone,
+            website: dataShow[i].website,
+            email: dataShow[i].email,
+            founded: dataShow[i].founded,
+            clubColors: dataShow[i].clubColors
           }
         }
       }
@@ -99,14 +100,16 @@ const getHomepageData = () => {
         TEAMPAGE_DATA()
         .then(function(data) {
           dataShow = JSON.parse(data);
-          dataShow = {
+          dataShow = dataShow.teams;
+          let dataTeamlistSave = {
             name: "teamlist data",
-            teams: dataShow.teams
-          }
-
+            teams: dataShow
+          };
           // save teamlist to indexeddb
-          saveTeamlistData(dataShow)
+          saveTeamlistData(dataTeamlistSave)
           .then(function(response) {
+            console.log("homepage: " + dataShow);
+            console.log("homepage: " + dataTeamlistSave);
             console.log("homepage: Teamlist data berhasil disimpan " + response);
           })
         })
@@ -132,6 +135,7 @@ const getSavepageData = () => {
 };
 
 const getTeamListData = () => {
+  console.log("teamlist datashow: " + dataShow);
   // check data in the indexeddb
   getIndexTeamlistData()
   .then(function(response) {
@@ -140,18 +144,20 @@ const getTeamListData = () => {
       console.log("teamlist: getting teamlist data from API");
       TEAMPAGE_DATA().then((data) => {
         dataShow = JSON.parse(data);
-        dataShow = {
+        dataShow = dataShow.teams;
+        let dataTeamlistSave = {
           name: "teamlist data",
-          teams: dataShow.teams
+          teams: dataShow
         };
         mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
         
         // save teamlist into indexeddb
-        saveTeamlistData(dataShow);
+        saveTeamlistData(dataTeamlistSave);
         modalClickEvent("teamlist");
       });
     } else {
       console.log("teamlist: data teamlist dalam database ditemukan");
+      console.log("teamlist response: " + JSON.stringify(response));
       mainTag.innerHTML = CONTENT_LOADER("teamlist", response.teams);
       modalClickEvent("teamlist");
     }
@@ -168,8 +174,18 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("beforeend", MODAL);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
+  // redirect to homepage if hash is empty
   if(location.hash == "") {
     location.hash = "#homepage"
+  } else if(location.hash === "#teamlist") {
+    mainTag.innerHTML =  CONTENT_LOADER("teamlist", "empty");
+    getTeamListData();
+  } else if(location.hash === "#savedteam") {
+    mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
+    getSavepageData();
+  } else if(location.hash === "#homepage"){
+    mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
+    getHomepageData();
   }
 
   // initialization navbar

@@ -26,7 +26,7 @@ const SAVEDTEAM = (data) => {
           </div>
           <div class="col s8">
             <p>Name: ${data[i].name}</p>
-            <p>TLA: ${data[i].name}</p>
+            <p>TLA: ${data[i].tla}</p>
             <a data-team-name="${data[i].name}|${data[i].id}" class="waves-effect waves-light btn modal-trigger light-blue accent-4 detail-team" href="#team-modal">Detail</a>
           </div>
         </div>
