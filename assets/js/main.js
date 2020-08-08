@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(modalData);
       saveTeamData(modalData)
       .then(function() {
-        M.toast({html: "Team Berhasil disimpan"});
+        M.toast({html: "Team Berhasil disimpan", displayLength: 2000});
         modalSave.classList.add("disabled");
         modalSave.innerHTML = "Loading...";
         checkData(objectData.id)
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(function(resolve) {
         M.Modal.getInstance(modalElem[0]).close();
         getSavepageData();
-        M.toast({html: resolve});
+        M.toast({html: resolve, displayLength: 2000});
 
       })
     }
