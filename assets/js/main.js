@@ -10,9 +10,11 @@ let mainTag = document.getElementsByTagName('main')[0];
 let dataShow = ''; // first initial data
 let objectData = {}; // data used for modal
 let modalData = {}; // for saving data
+let dataTeamlistSave
 
 // modal event
 const modalClickEvent = (page) => {
+
   const detailButton = document.querySelectorAll('.modal-trigger');
   const instance = M.Modal.getInstance(detailButton);
   const detailTeam = document.querySelectorAll(".detail-team");
@@ -20,7 +22,6 @@ const modalClickEvent = (page) => {
   for(let i = 0; i < detailTeam.length; i++) {
     detailTeam[i].addEventListener("click", function(e) {
       e.preventDefault();
-      console.log("dataShow: " + JSON.stringify(dataShow));
       for(let i = 0; i < dataShow.length; i++) {
         if(dataShow[i].name == e.target.dataset.teamName.split("|")[0]){
           objectData = {
@@ -58,6 +59,7 @@ const getHomepageData = () => {
         // getting data from API
         HOMEPAGE_DATA()
         .then((data) => {
+          console.log("HOMEPAGE DATA GET RUN");
           dataShow = JSON.parse(data);
           dataShow = {
             name: dataShow.name,
@@ -76,6 +78,36 @@ const getHomepageData = () => {
           })
           mainTag.innerHTML = CONTENT_LOADER("homepage", dataShow);
         })
+        .then(function() {
+          // load team data on first visit
+          getIndexTeamlistData()
+          .then(function(response) {
+            console.log("GETTING TEAMLIST DATA RUN");
+            if(response == undefined) {
+              console.log("homepage: data teamlist tidak ditemukan di dalam database");
+              console.log("homepage: getting teamlist data from API");
+              TEAMPAGE_DATA()
+              .then(function(data) {
+                dataShow = JSON.parse(data);
+                dataShow = dataShow.teams;
+                dataTeamlistSave = {
+                  name: "teamlist data",
+                  teams: dataShow
+                };
+                // save teamlist to indexeddb
+                saveTeamlistData(dataTeamlistSave)
+                .then(function(response) {
+                  console.log("homepage: Teamlist data berhasil disimpan " + response);
+                })
+              })
+              .catch(function(err) {
+                console.log("homepage: teamlist - " + err )
+              })
+            } else {
+              console.log("homepage: data teamlist ditemukan di dalam database");
+            }
+          })
+        })
         .catch((err) => {
           // HOMEPAGE_DATA error
           console.log("Offline mode");
@@ -85,48 +117,18 @@ const getHomepageData = () => {
         console.log("data homepage ada di database");
         mainTag.innerHTML = CONTENT_LOADER("homepage", response);
       }
-    })  
+    })
     .catch(function(err) {
       // getIndexData error
       console.log("Oops terjadi error: " + err);
     })
 
-    // load team data on first visit
-    getIndexTeamlistData()
-    .then(function(response) {
-      if(response == undefined) {
-        console.log("homepage: data teamlist tidak ditemukan di dalam database");
-        console.log("homepage: getting teamlist data from API");
-        TEAMPAGE_DATA()
-        .then(function(data) {
-          dataShow = JSON.parse(data);
-          dataShow = dataShow.teams;
-          let dataTeamlistSave = {
-            name: "teamlist data",
-            teams: dataShow
-          };
-          // save teamlist to indexeddb
-          saveTeamlistData(dataTeamlistSave)
-          .then(function(response) {
-            console.log("homepage: " + dataShow);
-            console.log("homepage: " + dataTeamlistSave);
-            console.log("homepage: Teamlist data berhasil disimpan " + response);
-          })
-        })
-        .catch(function(err) {
-          console.log("homepage: teamlist - " + err )
-        })
-      } else {
-        console.log("homepage: data teamlist ditemukan di dalam database");
-      }
-    })
+    
 };
 
 const getSavepageData = () => {
   getAllTeam().then(function(data) {
     dataShow = data;
-    console.log("data: " + data);
-    console.log("dataShow: " + dataShow);
 
     mainTag.innerHTML = CONTENT_LOADER("savedteam", data);
 
@@ -135,29 +137,29 @@ const getSavepageData = () => {
 };
 
 const getTeamListData = () => {
-  console.log("teamlist datashow: " + dataShow);
   // check data in the indexeddb
   getIndexTeamlistData()
   .then(function(response) {
     if(response == undefined) {
       console.log("teamlist: data teamlist tidak ditemukan di database");
       console.log("teamlist: getting teamlist data from API");
-      TEAMPAGE_DATA().then((data) => {
+      TEAMPAGE_DATA()
+      .then((data) => {
         dataShow = JSON.parse(data);
         dataShow = dataShow.teams;
-        let dataTeamlistSave = {
+        dataTeamlistSave = {
           name: "teamlist data",
           teams: dataShow
         };
         mainTag.innerHTML = CONTENT_LOADER("teamlist", dataShow);
-        
+      })
+      .then(function() {
         // save teamlist into indexeddb
         saveTeamlistData(dataTeamlistSave);
         modalClickEvent("teamlist");
-      });
+      })
     } else {
       console.log("teamlist: data teamlist dalam database ditemukan");
-      console.log("teamlist response: " + JSON.stringify(response));
       mainTag.innerHTML = CONTENT_LOADER("teamlist", response.teams);
       modalClickEvent("teamlist");
     }

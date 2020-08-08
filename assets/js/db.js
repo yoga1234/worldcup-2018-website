@@ -73,7 +73,13 @@ function saveTeamlistData(data) {
     .then(function(db) {
       let tx = db.transaction("teamlist", "readwrite");
       let store = tx.objectStore("teamlist");
-      return store.add(data);
+      // check if data is already exists
+      if(store.get("teamlist data") != undefined) {
+        return "Data telah tersedia di dalam database";
+      } else {
+        return store.add(data);
+      }
+      // return store.add(data);
     })
     .then(function(response) {
       resolve(response)
