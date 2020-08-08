@@ -7,8 +7,7 @@ let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
     keyPath: "name",
   });
   let teamListObjectStore = upgradeDb.createObjectStore("teamlist", {
-    keyPath: "id",
-    autoIncrement: true
+    keyPath: "name",
   })
   teamObjectStore.createIndex("name", "name", { unique: false});
 });
@@ -56,7 +55,7 @@ function getIndexTeamlistData() {
     .then(function(db) {
       let tx = db.transaction("teamlist", "readonly");
       let store = tx.objectStore("teamlist");
-      return store.getAll();
+      return store.get("teamlist data");
     })
     .then(function(teams) {
       resolve(teams);
@@ -76,8 +75,8 @@ function saveTeamlistData(data) {
       let store = tx.objectStore("teamlist");
       return store.add(data);
     })
-    .then(function() {
-      resolve("Teamlist berhasil disimpan")
+    .then(function(response) {
+      resolve(response)
     })
     .catch(function(err) {
       reject(err);
