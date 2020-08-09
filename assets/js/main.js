@@ -39,6 +39,7 @@ const modalClickEvent = (page) => {
         }
       }
       // check if data exists first
+      console.log(objectData);
       checkData(objectData.id)
       .then(function(resolve) {
         MODAL_TEAM_DETAIL(objectData, page, resolve)

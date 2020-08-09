@@ -15,7 +15,9 @@ const MODAL_TEAM_DETAIL = (teamData, page, checkData) => {
     modalDynamicButton.classList.remove("disabled");
     modalDynamicButton.classList.add("red");
     modalDynamicButton.innerText ="Remove From saved";
-  } else {
+  }
+
+  if(page == "teamlist") {
     if(checkData != undefined ) {
       modalDynamicButton.classList.remove("red");
       modalDynamicButton.classList.add("indigo");
