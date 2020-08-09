@@ -42,11 +42,9 @@ self.addEventListener("fetch", function(event) {
       .match(event.request, { cacheName: CACHE_NAME})
       .then(function(response) {
         if(response != undefined) {
-          console.log("event reques: " + event.request);
           return response;
         }
         
-        console.log("fetch : " + event.request);  
         return fetch(event.request);
       })
   );

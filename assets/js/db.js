@@ -12,24 +12,6 @@ let dbPromised = idb.open("worldcup-team", 1, function(upgradeDb) {
   teamObjectStore.createIndex("name", "name", { unique: false});
 });
 
-// saving homepage function
-function saveHomepageData(data) {
-  return new Promise(function(resolve, reject) {
-    dbPromised
-    .then(function(db) {
-      let tx = db.transaction("homepage", "readwrite");
-      let store = tx.objectStore("homepage");
-      return store.add(data)
-    })
-    .then(function() {
-      resolve("Homepage data disimpan");
-    })
-    .catch(function(err) {
-      reject(err);
-    })
-  })
-}
-
 // get homepage data
 function getIndexHomeData() {
   return new Promise(function(resolve, reject) {
@@ -47,6 +29,24 @@ function getIndexHomeData() {
     });
   });
 };
+
+// saving homepage function
+function saveHomepageData(data) {
+  return new Promise(function(resolve, reject) {
+    dbPromised
+    .then(function(db) {
+      let tx = db.transaction("homepage", "readwrite");
+      let store = tx.objectStore("homepage");
+      return store.put(data);
+    })
+    .then(function(response) {
+      resolve(response);
+    })
+    .catch(function(err) {
+      reject(err);
+    })
+  })
+}
 
 // get teamlist data
 function getIndexTeamlistData() {
@@ -73,12 +73,7 @@ function saveTeamlistData(data) {
     .then(function(db) {
       let tx = db.transaction("teamlist", "readwrite");
       let store = tx.objectStore("teamlist");
-      // check if data is already exists
-      if(store.get("teamlist data") != undefined) {
-        return "Data telah tersedia di dalam database";
-      } else {
-        return store.add(data);
-      }
+      return store.put(data);
     })
     .then(function(response) {
       resolve(response)

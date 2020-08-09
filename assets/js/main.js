@@ -68,10 +68,12 @@ const getHomepageData = () => {
             start: dataShow.currentSeason.startDate,
             end: dataShow.currentSeason.endDate,
           };
+        })
+        .then(function() {
           // save data into database
           saveHomepageData(dataShow)
-          .then(function() {
-            console.log("homepage: Data homepage berhasil disimpan");
+          .then(function(response) {
+            console.log("homepage save: " + response);
           })
           .catch(function(err) {
             console.log("homepage: " + err);
@@ -97,7 +99,7 @@ const getHomepageData = () => {
                 // save teamlist to indexeddb
                 saveTeamlistData(dataTeamlistSave)
                 .then(function(response) {
-                  console.log("homepage: Teamlist data berhasil disimpan " + response);
+                  console.log("teamlist save: " + response);
                 })
               })
               .catch(function(err) {
@@ -210,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
     if(e.target.innerText == "SAVE TEAM") {
-      console.log(modalData);
       saveTeamData(modalData)
       .then(function() {
         M.toast({html: "Team Berhasil disimpan", displayLength: 2000});
