@@ -3,6 +3,8 @@ let urlsToCache = [
   "/",
   "/index.html",
   "/register-sw.js",
+  "/manifest.json",
+  "/push.js",
   "/assets/components/footer.js",
   "/assets/components/modal.js",
   "/assets/components/modal-generator.js",
@@ -12,8 +14,17 @@ let urlsToCache = [
   "/assets/components/pages/teamlist.js",
   "/assets/css/main.css",
   "/assets/css/materialize.min.css",
+  "/assets/images/72x72.png",
+  "/assets/images/96x96.png",
+  "/assets/images/128x128.png",
+  "/assets/images/144x144.png",
+  "/assets/images/152x152.png",
   "/assets/images/180x180.png",
+  "/assets/images/192x192.png",
+  "/assets/images/384x384.png",
+  "/assets/images/512x512.png",
   "/assets/images/not-found.svg",
+  "/assets/images/push-badge.png",
   "/assets/images/save.svg",
   "/assets/images/soccer.svg",
   "/assets/images/tablet.svg",
@@ -62,5 +73,28 @@ self.addEventListener("activate", function(event) {
         })
       );
     })
+  );
+});
+
+// push notification
+self.addEventListener('push', function(event) {
+  let body;
+  if(event.data) {
+    body = event.data.text();
+  } else {
+    body = "Push message no payload";
+  }
+
+  let options = {
+    body: body,
+    icon: '/assets/images/push-badge.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    }
+  };
+  event.waitUntil(
+    self.registration.showNotification('Push Notification', options)
   );
 });

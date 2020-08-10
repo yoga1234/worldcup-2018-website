@@ -14,7 +14,6 @@ let dataTeamlistSave
 
 // modal event
 const modalClickEvent = (page) => {
-  console.log("ModalClickEvent: " + dataShow);
 
   const detailButton = document.querySelectorAll('.modal-trigger');
   const instance = M.Modal.getInstance(detailButton);
@@ -183,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
   // initial homepage
+  mainTag.innerHTML = CONTENT_LOADER("homepage", "empty")
   getHomepageData()
 
   // initialization navbar
