@@ -5,7 +5,7 @@ const MODAL = `
       <h4 class="white-text light center modal-mark">Team Detail</h4>
       <hr>
       <div class="center">
-        <img class="modal-flag-image" src="./assets/images/not-found.svg" alt="Country Flag">
+        <img class="responsive-img modal-flag-img" src="./assets/images/not-found.svg" alt="Country Flag">
       </div> <!-- center -->
       <div class="center">
         <div class="card-panel">

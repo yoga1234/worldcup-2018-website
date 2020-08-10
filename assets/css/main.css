@@ -15,11 +15,6 @@ main {
 .margin-top-50 {
   margin-top: 50px;
 }
-.modal-flag-image {
-  width: 50%;
-  min-width: 350px;
-  max-width: 450px;
-}
 .modal {
   width: 75% !important;
   height: 75% !important;

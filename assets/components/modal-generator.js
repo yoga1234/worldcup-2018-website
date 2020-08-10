@@ -1,5 +1,5 @@
 const MODAL_TEAM_DETAIL = (teamData, page, checkData) => {
-  let countryFlag = document.querySelector(".modal-flag-image");
+  let countryFlag = document.querySelector(".modal-flag-img");
   let teamName = document.querySelector(".team-name");
   let teamTla = document.querySelector(".team-tla");
   let teamAddress = document.querySelector(".team-address");
