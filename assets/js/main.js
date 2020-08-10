@@ -14,6 +14,7 @@ let dataTeamlistSave
 
 // modal event
 const modalClickEvent = (page) => {
+  console.log("ModalClickEvent: " + dataShow);
 
   const detailButton = document.querySelectorAll('.modal-trigger');
   const instance = M.Modal.getInstance(detailButton);
@@ -39,7 +40,8 @@ const modalClickEvent = (page) => {
         }
       }
       // check if data exists first
-      console.log(objectData);
+      // if(objectData.id)
+      console.log(objectData.id)
       checkData(objectData.id)
       .then(function(resolve) {
         MODAL_TEAM_DETAIL(objectData, page, resolve)
@@ -163,6 +165,7 @@ const getTeamListData = () => {
       })
     } else {
       console.log("teamlist: data teamlist dalam database ditemukan");
+      dataShow = response.teams;
       mainTag.innerHTML = CONTENT_LOADER("teamlist", response.teams);
       modalClickEvent("teamlist");
     }
