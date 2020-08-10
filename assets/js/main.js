@@ -182,19 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.insertAdjacentHTML("beforeend", MODAL);
   document.body.insertAdjacentHTML("beforeend", FOOTER);
 
-  // redirect to homepage if hash is empty
-  if(location.hash == "") {
-    location.hash = "#homepage"
-  } else if(location.hash === "#teamlist") {
-    mainTag.innerHTML =  CONTENT_LOADER("teamlist", "empty");
-    getTeamListData();
-  } else if(location.hash === "#savedteam") {
-    mainTag.innerHTML = CONTENT_LOADER("savedteam", "empty");
-    getSavepageData();
-  } else if(location.hash === "#homepage"){
-    mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
-    getHomepageData();
-  }
+  // initial homepage
+  getHomepageData()
 
   // initialization navbar
   const navbarElems = document.querySelectorAll('.sidenav');
