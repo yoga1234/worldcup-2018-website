@@ -37,7 +37,7 @@ function requestPermission() {
         .then(function(registration) {
           registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array("BEG-onDHxSsUmYssw5AYfUqFiNRbSw8Za-yTZhqnMi8jTdV2hyfVdd41yRUtZb0T3HaLZkBWekHYUnDgDrRLPXQ")
+            applicationServerKey: urlBase64ToUint8Array("BJFX7VOHPn6zxVg0ha9urYPwKm3RGY2WXZ5nhqNqXrGsBFvhM0UQHcDmVAhOzkkaWUkWjTrOv47LjgsRm7sYyHU")
           })
           .then(function(subscribe) {
             console.log("Berhasil subscribe dengan endpoint: ", subscribe.endpoint);
@@ -48,7 +48,7 @@ function requestPermission() {
               null, new Uint8Array(subscribe.getKey('auth'))
             )));
           }).catch(function(e) {
-            console.error("subscribe gagal: ", e.message);
+            console.error("subscribe gagal: ", e.message + e);
           })
         })
       }
