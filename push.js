@@ -1,8 +1,8 @@
 let webPush = require('web-push');
 
 const vapidKeys = {
-  "publicKey": "BJFX7VOHPn6zxVg0ha9urYPwKm3RGY2WXZ5nhqNqXrGsBFvhM0UQHcDmVAhOzkkaWUkWjTrOv47LjgsRm7sYyHU",
-  "privateKey": "RBtX33OVqUqm0pKDA0v1w3Ur5DXIOMikx33qCWUEqYs"
+  "publicKey": "BKsLRT_8_G1gzMdWqfY66rpvsSzClLf0p5yXvWycYKoRWL29mCemjWzjIRvbJ87G54Bmln1kyiY3zNwyo0Ehxh4",
+  "privateKey": "Q_eqQBQigQpx-Ap30qf49dznxytMfoB4AuRc6-jutqw"
 }
 
 webPush.setVapidDetails(
@@ -11,10 +11,10 @@ webPush.setVapidDetails(
   vapidKeys.privateKey
 )
 let pushSubsciption = {
-  "endpoint": "https://fcm.googleapis.com/fcm/send/fNoC8QzU0M4:APA91bGflMdPeDwdF16Ep2I4T-ZuHk_wqW2JP8AaJ0NuGtdi0_5BVBUho8hT3xSvJijlUhFS5BpDaignozpxNDUPMfXa863alRUY_i27R1JVQOM9L_5Se-kvcax8rXgeYu1Y6nQDYq7a",
+  "endpoint": "https://fcm.googleapis.com/fcm/send/dsKONJm7rpw:APA91bHPnhwwABoNgXLQFoJfPjaX7-WsN-YCCG4CcZxWX2_eecpS4_xebH-YsMu07cEg6DSYIejN8brkF9jCx93gjy88RrcvVvRtK20LckEOVmYshzk8EsQ2Yr8JeUynV1eVNoCd7hCn",
   "keys": {
-    "p256dh": "BNh1a22WxgudQ4RXBhmiCJnk159XGhBer176BWvdHPdiam7hliJ/UMSG+u582mcJH4o/cRX7j/m955maA8Vs9VM=",
-    "auth": "FJGatjZL3jkS1QlnNv+NLw=="
+    "p256dh": "BKO5hLko1WBBz9NPZS1Fzu5g6WV8JVCcCK1bu/L0ZUNVCkF9E5UXemYOVLjB+LsWXyfX0PYJlGOI5eupM/nkTfI=",
+    "auth": "X3PtH1nfyziTOdrUVGXM+w=="
   }
 };
 let payload = "Aplikasi sudah dapat menerima push notifikasi";

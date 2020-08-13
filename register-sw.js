@@ -31,13 +31,12 @@ function requestPermission() {
         return;
       }
 
-
       if(("PushManager" in window)) {
         navigator.serviceWorker.getRegistration()
         .then(function(registration) {
           registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array("BJFX7VOHPn6zxVg0ha9urYPwKm3RGY2WXZ5nhqNqXrGsBFvhM0UQHcDmVAhOzkkaWUkWjTrOv47LjgsRm7sYyHU")
+            applicationServerKey: urlBase64ToUint8Array("BKsLRT_8_G1gzMdWqfY66rpvsSzClLf0p5yXvWycYKoRWL29mCemjWzjIRvbJ87G54Bmln1kyiY3zNwyo0Ehxh4")
           })
           .then(function(subscribe) {
             console.log("Berhasil subscribe dengan endpoint: ", subscribe.endpoint);

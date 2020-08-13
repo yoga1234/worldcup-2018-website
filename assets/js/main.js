@@ -2,9 +2,12 @@ import NAVBAR from '../components/navbar.js';
 import MODAL from '../components/modal.js'
 import FOOTER from '../components/footer.js';
 import MODAL_TEAM_DETAIL from '../components/modal-generator.js';
-import {HOMEPAGE_DATA, TEAMPAGE_DATA} from './api.js'
+import DATA_FETCH_API from './api.js'
 
 import CONTENT_LOADER from './contentLoader.js';
+
+const HOMEPAGE_URL = 'https://api.football-data.org/v2/competitions/2000';
+const TEAMLIST_URL = 'https://api.football-data.org/v2/competitions/2000/teams';
 
 let mainTag = document.getElementsByTagName('main')[0];
 let dataShow = ''; // first initial data
@@ -59,7 +62,7 @@ const getHomepageData = () => {
         console.log("homepage: data homepage belum ada di database");
         console.log("homepage: getting homepage data from API");
         // getting data from API
-        HOMEPAGE_DATA()
+        DATA_FETCH_API(HOMEPAGE_URL)
         .then((data) => {
           console.log("HOMEPAGE DATA GET RUN");
           dataShow = JSON.parse(data);
@@ -90,7 +93,7 @@ const getHomepageData = () => {
             if(response == undefined) {
               console.log("homepage: data teamlist tidak ditemukan di dalam database");
               console.log("homepage: getting teamlist data from API");
-              TEAMPAGE_DATA()
+              DATA_FETCH_API(TEAMLIST_URL)
               .then(function(data) {
                 dataShow = JSON.parse(data);
                 dataShow = dataShow.teams;
@@ -147,7 +150,7 @@ const getTeamListData = () => {
     if(response == undefined) {
       console.log("teamlist: data teamlist tidak ditemukan di database");
       console.log("teamlist: getting teamlist data from API");
-      TEAMPAGE_DATA()
+      DATA_FETCH_API(TEAMLIST_URL)
       .then((data) => {
         dataShow = JSON.parse(data);
         dataShow = dataShow.teams;
