@@ -1,6 +1,6 @@
 const TEAMLIST = (data) => {
   let eventData = '';
-  if(data == "empty") {
+  if(data === "empty") {
     eventData = `
       <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
@@ -17,7 +17,7 @@ const TEAMLIST = (data) => {
   } else {
     for(let i = 0; i < data.length; i++) {
       let teamImage = '';
-      if(data[i].crestUrl == null || data[i].crestUrl == "") {
+      if(data[i].crestUrl === null || data[i].crestUrl === "") {
         teamImage = './assets/images/not-found.svg';
       } else {
         teamImage = data[i].crestUrl;

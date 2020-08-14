@@ -1,6 +1,6 @@
 const HOMEPAGE = (data) => {
   let eventData = ''
-  if(data == "empty") {
+  if(data === "empty") {
     eventData = `
       <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
@@ -14,7 +14,7 @@ const HOMEPAGE = (data) => {
         </div>
       </div>
     `;
-  } if(data == "database") {
+  } if(data === "database") {
     eventData = `<h5 class="margin-top-50 center-align light">Oops, Someting is wrong :(</h5>`;
   } else {
     eventData = `

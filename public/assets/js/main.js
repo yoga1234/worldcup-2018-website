@@ -26,7 +26,7 @@ const modalClickEvent = (page) => {
     detailTeam[i].addEventListener("click", function(e) {
       e.preventDefault();
       for(let i = 0; i < dataShow.length; i++) {
-        if(dataShow[i].name == e.target.dataset.teamName.split("|")[0]){
+        if(dataShow[i].name === e.target.dataset.teamName.split("|")[0]){
           objectData = {
             id: dataShow[i].id,
             name: dataShow[i].name,
@@ -58,7 +58,7 @@ const getHomepageData = () => {
   // check if data already exists in the indexeddb
   getIndexHomeData()
     .then(function(response) {
-      if(response == undefined) {
+      if(response === undefined) {
         console.log("homepage: data homepage belum ada di database");
         console.log("homepage: getting homepage data from API");
         // getting data from API
@@ -90,7 +90,7 @@ const getHomepageData = () => {
           getIndexTeamlistData()
           .then(function(response) {
             console.log("GETTING TEAMLIST DATA RUN");
-            if(response == undefined) {
+            if(response === undefined) {
               console.log("homepage: data teamlist tidak ditemukan di dalam database");
               console.log("homepage: getting teamlist data from API");
               DATA_FETCH_API(TEAMLIST_URL)
@@ -147,7 +147,7 @@ const getTeamListData = () => {
   // check data in the indexeddb
   getIndexTeamlistData()
   .then(function(response) {
-    if(response == undefined) {
+    if(response === undefined) {
       console.log("teamlist: data teamlist tidak ditemukan di database");
       console.log("teamlist: getting teamlist data from API");
       DATA_FETCH_API(TEAMLIST_URL)
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // modal save button
   let modalSave = document.querySelector(".save-modal-btn");
   modalSave.addEventListener("click", function(e) {
-    if(e.target.innerText == "SAVE TEAM") {
+    if(e.target.innerText === "SAVE TEAM") {
       saveTeamData(modalData)
       .then(function() {
         M.toast({html: "Team Berhasil disimpan", displayLength: 2000});
@@ -247,7 +247,7 @@ window.addEventListener('hashchange', function() {
   } else if(location.hash === "#homepage"){
     mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
     getHomepageData();
-  } else if(location.hash == ""){
+  } else if(location.hash === ""){
     mainTag.innerHTML =  CONTENT_LOADER("homepage", "empty");
     getHomepageData();
   }

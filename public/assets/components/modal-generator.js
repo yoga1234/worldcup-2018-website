@@ -10,15 +10,15 @@ const MODAL_TEAM_DETAIL = (teamData, page, checkData) => {
   let teamColors = document.querySelector(".team-colors");
   let modalDynamicButton = document.getElementById("modal-dynamic-btn");
 
-  if(page == "savedteam") {
+  if(page === "savedteam") {
     modalDynamicButton.classList.remove("indigo");
     modalDynamicButton.classList.remove("disabled");
     modalDynamicButton.classList.add("red");
     modalDynamicButton.innerText ="Remove From saved";
   }
 
-  if(page == "teamlist") {
-    if(checkData != undefined ) {
+  if(page === "teamlist") {
+    if(checkData !== undefined ) {
       modalDynamicButton.classList.remove("red");
       modalDynamicButton.classList.add("indigo");
       modalDynamicButton.classList.add("disabled");
@@ -32,12 +32,12 @@ const MODAL_TEAM_DETAIL = (teamData, page, checkData) => {
   }
 
   // check for country flag
-  if(teamData.crestUrl == null || teamData.crestUrl == "") {
+  if(teamData.crestUrl === null || teamData.crestUrl === "") {
     teamData.crestUrl = './assets/images/not-found.svg';
   }
 
   // check for email
-  if(teamData.email == null || teamData.email == "") {
+  if(teamData.email === null || teamData.email === "") {
     teamEmail.innerHTML = "Email: <i>Email not available</i>";
   } else {
     teamEmail.innerHTML = "Email: <strong>" + teamData.email + "</strong>";

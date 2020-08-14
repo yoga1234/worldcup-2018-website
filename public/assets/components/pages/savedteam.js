@@ -1,6 +1,6 @@
 const SAVEDTEAM = (data) => {
   let eventData = '';
-  if(data == "empty") {
+  if(data === "empty") {
     eventData = `
     <div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue-only">
@@ -14,7 +14,7 @@ const SAVEDTEAM = (data) => {
       </div>
     </div>
     `;
-  } else if(data == "") {
+  } else if(data === undefined || data.length == 0) {
     eventData = '<h5 class="margin-top-50 center-align light">No Team Saved.</h5>';
   } else {
     for(let i = 0; i < data.length; i++) {
