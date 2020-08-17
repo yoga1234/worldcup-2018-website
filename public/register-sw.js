@@ -36,7 +36,7 @@ function requestPermission() {
         .then(function(registration) {
           registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array("BPEeT_WMd0_cMDLiggC6-siDZDAXM2zTNvd9Q7Vwkgkw56-JeduJqbsJdpaimzXGOs_a57BeznbRsRlzCXtL-gM")
+            applicationServerKey: urlBase64ToUint8Array("BF5xcTeBvVqKGoILUcpBnj8LmS61x1AsUM1ftM1QNvtqbYBQmETlIuP4HskOSwSxjJBdLWUZKBmtZQpGFkxeGk4")
           })
           .then(function(subscribe) {
             console.log("Berhasil subscribe dengan endpoint: ", subscribe.endpoint);
