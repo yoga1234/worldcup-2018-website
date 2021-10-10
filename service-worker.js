@@ -10,7 +10,7 @@ let urlsToCache = [
   "./assets/components/modal-generator.js",
   "./assets/components/navbar.js",
   "./assets/components/pages/homepage.js",
-  "./assets/components/pages/savedTeam.js",
+  "./assets/components/pages/savedteam.js",
   "./assets/components/pages/teamlist.js",
   "./assets/css/main.css",
   "./assets/css/materialize.min.css",
